@@ -126,6 +126,7 @@ void myBubbleSort(Mylista_ligada<int>& lista)
 * @brief Simula o insertion sort, ordenando uma lista de int a deixanda crescente.
 * @param lista Mylista_ligada<int> que será ordenada
 */
+/*
 void myInsertSort(Mylista_ligada<int>& lista){ //Insert na head
 	// ini+1 > fim 	(vazio)
 	// fim == ini+1 	(um elemento)
@@ -165,5 +166,5 @@ void myInsertSort(Mylista_ligada<int>& lista){ //Insert na head
 		for (int ord = ini+1;	ord > 0 and v[ord] < v[ord-1];	 ord--)
 			mySwap( v[ord], v[ord-1]);
 }
-
+*/
 #endif

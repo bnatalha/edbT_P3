@@ -11,15 +11,17 @@
 
 #include <ctime>
 #include "header.h"
-#include "Mylista_ligada_alg.h"
+#include "myLista.h"
+#include "myLista_alg.h"
 
 
-void fill_lista(Mylista_ligada<int>& test, int N);	/**< Preenche um Mylista_ligada de inteiros com valores aleatórios entre 0 e 30. */
+void fill_lista(myLista<int>& test, int N);	/**< Preenche um myLista de inteiros com valores aleatórios entre 0 e 30. */
 
 template< typename T>
-void print_lista(Mylista_ligada<T>& test);
+void print_lista(myLista<T>& test);
 
-void sort_test(Mylista_ligada<int>& test, const int N, void (*alg_sort) (Mylista_ligada<int>&));	/**< Preenche um Mylista_ligada de inteiros com valores aleatorios e depois os ordena utilizando uma função sort */
+void sort_test(myLista<int>& test, const int N, void (*alg_sort) (myLista<int>&));	/**< Preenche um myLista de inteiros com valores aleatorios e depois os ordena utilizando uma função sort */
+void sort_test2(myLista<int>& test, const int N, void (*alg_sort) (myLista<int>&, typename myLista<int>::iterator, typename myLista<int>::iterator ) ); /**< Preenche um myLista de inteiros com valores aleatorios e depois os ordena utilizando uma função sort com iterators de parametro */
 
 /**
 * @brief Testa os algoritmos de ordenação com listas de interios gerados aleatoriamente e alocados dinamicamente
@@ -32,26 +34,26 @@ void testar_ordenacao( )
 	int sizes[6] = {0, 1, 2, 3, 16, 17};	/*< Arranjo de inteiros que armazenará o tamanho dos listas apontados por 'arrays' */
 	//				0  1  2  3   4   5
 	
-	Mylista_ligada<int> lista;	/**< Ponteiro para Mylista_ligada de inteiros dinamicamente alocado de tamanho '6' */
+	myLista<int> lista;	/**< Ponteiro para myLista de inteiros dinamicamente alocado de tamanho '6' */
 
 	for(auto i = 0; i < 6; i++)
 	//for(auto i = 0; i <= 4; i++)
 	{
 		cout << "=======================================================================================" << endl;
 		cout << " Testes com vetor de tamanho: ( " << sizes[i] << " )" << endl;
-		cout << "---------------- myBubbleSort----------------" << endl;
+	/*	cout << "---------------- myBubbleSort----------------" << endl;
 		sort_test(lista, sizes[i], myBubbleSort);
 		cout << "---------------------------------------------" << endl;
-	/*	cout << "---------------- myInsertSort----------------" << endl;
+		cout << "---------------- myInsertSort----------------" << endl;
 		sort_test(lista, sizes[i], myInsertSort);
 		cout << "---------------------------------------------" << endl;
 		cout << "---------------- mySelectionSort----------------" << endl;
 		sort_test(lista, sizes[i], mySelectionSort);
 		cout << "---------------------------------------------" << endl;
-		cout << "---------------- myQuickSort----------------" << endl;
-		sort_test(lista, sizes[i], myQuickSort);
+	*/	cout << "---------------- myQuickSort----------------" << endl;
+		sort_test2(lista, sizes[i], myQuickSort);
 		cout << "---------------------------------------------" << endl;
-		cout << "---------------- mySplitSort----------------" << endl;
+	/*	cout << "---------------- mySplitSort----------------" << endl;
 		sort_test(lista, sizes[i], mySplitSort);
 		cout << "---------------------------------------------" << endl;
 	*/	cout << "=======================================================================================" << endl;
@@ -59,10 +61,10 @@ void testar_ordenacao( )
 }
 
 /**
-* @param v Mylista_ligada de inteiros a ser preenchida
-* @param N tamanho do Mylista_ligada a ser preenchida
+* @param test myLista de inteiros a ser preenchida
+* @param N tamanho do myLista a ser preenchida
 */
-void fill_lista(Mylista_ligada<int>& test, int N)
+void fill_lista(myLista<int>& test, int N)
 {	
 	test.clear();	// limpa a lista antes de preenche-la
 	int x;
@@ -77,12 +79,12 @@ void fill_lista(Mylista_ligada<int>& test, int N)
 }
 
 /**
-* @brief Imprime o conteúdo de um objeto Mylista_ligada no terminal
-* @param test Mylista_ligada a ser impresso
+* @brief Imprime o conteúdo de um objeto myLista no terminal
+* @param test myLista a ser impresso
 * @param list_name nome da variável que guarda 'test'
 */
 template< typename T>
-void print_lista(Mylista_ligada<T>& test)
+void print_lista(myLista<T>& test)
 {
 	cout << "Conteúdo: [ ";
 	for (auto &e : test)
@@ -91,22 +93,45 @@ void print_lista(Mylista_ligada<T>& test)
 }
 
 /**
-* @param v Mylista_ligada de inteiros
+* @param test myLista de inteiros
 * @param alg_sort ponteiro para a função de ordenação a ser utilizada
 */
-void sort_test(Mylista_ligada<int>& test, const int N, void (*alg_sort) (Mylista_ligada<int>&) )
+void sort_test(myLista<int>& test, const int N, void (*alg_sort) (myLista<int>&) )
 {
-	cout << "Preenchendo meu Mylista_ligada de inteiros com valores aleatorios...";
-	fill_lista(test,N);	// Preenche Mylista_ligada com valores aleatorios entre 0 e 30.
+	cout << "Preenchendo meu myLista de inteiros com valores aleatorios...";
+	fill_lista(test,N);	// Preenche myLista com valores aleatorios entre 0 e 30.
 
 	cout << "Pronto." << endl;
-	print_lista(test);	// Mostra o conteudo do Mylista_ligada gerado aleatoriamente no terminal.
+	print_lista(test);	// Mostra o conteudo do myLista gerado aleatoriamente no terminal.
 
-	cout << endl << "Ordenando Mylista_ligada...";
-	alg_sort(test);	// Ordena o Mylista_ligada usando o algoritmo escolhido.
+	cout << endl << "Ordenando myLista...";
+	alg_sort(test);	// Ordena o myLista usando o algoritmo escolhido.
 
 	cout << "Pronto." << endl;
-	print_lista(test);	// Mostra o conteudo do Mylista_ligada após ter sido oredenado.
+	print_lista(test);	// Mostra o conteudo do myLista após ter sido oredenado.
+	cout << endl;
+}
+
+/**
+* @param test myLista de inteiros
+* @param alg_sort ponteiro para a função de ordenação a ser utilizada
+*/
+void sort_test2(myLista<int>& test, const int N, void (*alg_sort) (myLista<int>&, typename myLista<int>::iterator, typename myLista<int>::iterator ) )
+{
+	cout << "Preenchendo meu myLista de inteiros com valores aleatorios...";
+	fill_lista(test,N);	// Preenche myLista com valores aleatorios entre 0 e 30.
+
+	cout << "Pronto." << endl;
+	print_lista(test);	// Mostra o conteudo do myLista gerado aleatoriamente no terminal.
+
+	typename myLista<int>::iterator ini = test.begin();
+	typename myLista<int>::iterator fim = test.before_end();
+
+	cout << endl << "Ordenando myLista...";
+	alg_sort(test,ini,fim);	// Ordena o myLista usando o algoritmo escolhido.
+
+	cout << "Pronto." << endl;
+	print_lista(test);	// Mostra o conteudo do myLista após ter sido oredenado.
 	cout << endl;
 }
 
