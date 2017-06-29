@@ -35,29 +35,11 @@ template <typename T>
 bool menorque(T a, T b) { return (a < b); }
 
 template <typename T>
-bool Lista_BuscaSequencial(myLista<T>& lista, const T elemento)
+bool Lista_BuscaSequencial(myLista<T>& lista, const T elem)
 {
-	return lista.exist(elemento);
+	return lista.exist(elem);
 }
 
-/*
-template <typename T>
-bool Lista_BuscaBinaria(myLista<T>& lista, const T elemento)
-{
-	typename myLista<T>::iterator p = lista.begin();	// Cria iterator apontando para begin
-	typename myLista<T>::iterator ini = lista.begin();
-	typename myLista<T>::iterator fim = lista.b_end();
-
-	advance(p , size()/2);
-
-	for( ; ( *(ini) <= *(fim) ; p = (ini+fim)/2 ){
-		if ( x == v[p]) return true;
-		if( x > v[p] ) ini = p+1;
-		if( x < v[p] ) fim = p-1;
-	}
-
-}
-*/
 
 // =====================================================================================================
 // ======================================== Ordenação na lista =========================================

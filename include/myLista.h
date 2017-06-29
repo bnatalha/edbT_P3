@@ -174,10 +174,7 @@ class myLista
 		myLista<T>& operator= (const myLista<T> copy);
 
 		//===============================================================================
-
-		//auxiliares
-		iterator b_end();
-		void advance(myLista<T>::iterator& it, const int x);
+		
 
 		//amigos
 		//friend bool Lista_BuscaBinaria(myLista<T>& lista, const T elemento);

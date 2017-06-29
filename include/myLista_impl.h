@@ -321,15 +321,6 @@ typename myLista<T>::iterator myLista<T>::before_end()
 	return cit;
 }
 
-template < typename T>
-void advance( typename myLista<T>::iterator& it, const int x)
-{
-	if (x >= 0 )
-		for(int i=0; i < x; i++) it++;
-	else
-		for(int i=0; i > x; i--) it--;
-}
-
 
 // ====================================================================================================
 // ========================================== COSTRUTORES =============================================

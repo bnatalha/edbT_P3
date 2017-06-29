@@ -49,6 +49,9 @@ void testar_ordenacao( )
 		cout << "---------------- mySelectionSort----------------" << endl;
 		sort_test(lista, sizes[i], mySelectionSort);
 		cout << "---------------------------------------------" << endl;
+		cout << "---------------- myBinarySearch----------------" << endl;
+		cout << (myBuscaBinaria(lista,0)? "Achou ":"Não achou ") << 0 <<endl;
+		cout << "---------------------------------------------" << endl;
 		cout << "=======================================================================================" << endl;
 	}
 }
