@@ -47,21 +47,21 @@ val:
 
 # ============== EXECUTABLES ==============
 # For main:
-#build/main: build/main.o build/func_ordem.o
-#	g++ $^ -o $@
+build/main: build/main.o build/myTAD_stats.o
+	g++ $^ -o $@
 
 # For main:
-build/main: build/main.o
-	g++ $^ -o $@
+#build/main: build/main.o
+#	g++ $^ -o $@
 
 # ================ OBJECTS ================
 # For main:
 build/main.o: src/main.cpp
 	g++ $(CPPFLAGS) $< -c -o $@
 
-# For func_ordem:
-#build/func_ordem.o: src/func_ordem.cpp
-#	g++ $(CPPFLAGS) $< -c -o $@
+# For myTAD_stats:
+build/myTAD_stats.o: src/myTAD_stats.cpp
+	g++ $(CPPFLAGS) $< -c -o $@
 
 # ================ CLEANER ================
 # Removes objects

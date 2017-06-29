@@ -8,7 +8,7 @@
 
 #include "header.h"
 #include "testar_ordenacao.h"
-#include "testar_lista.h"
+//#include "testar_lista.h"
 
 /**
 * @brief Solicita ao usuário se ele deseja proceder com um determinado teste do namespace edb1;
@@ -33,25 +33,29 @@ bool proceder(const char* testname)
 */
 int main(int argc, char const *argv[])
 {	
+
+	auto comeco = std::chrono::steady_clock::now();
+
+
 	cout << "Testando TADS:" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
-	if( proceder("myLista") )
-	{
-		cout << "================ Mylista_ligada =================" << endl;
-		testar_lista();
-		cout << "=======================================fim" << endl;
-	}
-	
-	if( proceder("algoritmos de ordenação") )
-	{
-		cout << "Testando algoritmos de ordenação:" << endl;
-		cout << "--------------------------------------------------------------------------------" << endl;
-		cout << "--------------------------------------------------------------------------------" << endl;
-		testar_ordenacao();
-	}
+	cout << "================ Mylista_ligada =================" << endl;
+	cout << "Testando algoritmos de ordenação:" << endl;
+	cout << "--------------------------------------------------------------------------------" << endl;
+	cout << "--------------------------------------------------------------------------------" << endl;
+	testar_ordenacao_lista();
 	cout << "--------------------------------------------------------------------------------" << endl;
 	cout << "----------------------------------------FIM-------------------------------------" << endl << endl;
+	
+	auto fim = std::chrono::steady_clock::now();
+
+	auto total = fim - comeco;
+
+	auto tempo = std::chrono::duration_cast<std::chrono::minutes> (total);
+
+	if(tempo.count() > 0 ) cout << tempo.count() << "minutes and";
+	cout << std::chrono::duration_cast<std::chrono::seconds> (total).count() % 60 << "seconds." << endl;
 	
 	cout << "Saindo do programa de testes..." << endl;
 	return 0;

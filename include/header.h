@@ -29,25 +29,10 @@ using std::ifstream;
 
 #include <stdexcept>
 
+#include <chrono>
 
-// Algoritmos de ordenação
-
-void mySwap( int &a, int &b);
-
-bool maiorque(int a, int b);
-bool menorque(int a, int b);
-
-void myBubbleSort (int *v, int ini, int fim);	// crescente
-	
-void myInsertSort (int *v, int ini, int fim);	// crescente
-
-void mySelectionSort (int *v, int ini, int fim);	//
-	
-int myQuickSortPartition(int *v, int ini, int fim);
-void myQuickSort (int *v, int ini, int fim);
-	
-void mySplitSort (int *v, int ini, int fim);
-void myMergeSort (int *dir, int d_size, int *esq, int e_size, int *v, int fim);
+#define N_EXECUCOES 20
+typedef std::chrono::duration< double, std::centi > myTiming; // Tempo em decimal
 
 
 #endif
