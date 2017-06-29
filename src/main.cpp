@@ -8,7 +8,6 @@
 
 #include "header.h"
 #include "testar_ordenacao.h"
-//#include "testar_ord_dupla.h"
 #include "testar_lista.h"
 
 /**
@@ -37,7 +36,7 @@ int main(int argc, char const *argv[])
 	cout << "Testando TADS:" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
-	/*if( proceder("myLista") )
+	if( proceder("myLista") )
 	{
 		cout << "================ Mylista_ligada =================" << endl;
 		testar_lista();
@@ -46,12 +45,11 @@ int main(int argc, char const *argv[])
 	
 	if( proceder("algoritmos de ordenação") )
 	{
-	*/	cout << "Testando algoritmos de ordenação:" << endl;
+		cout << "Testando algoritmos de ordenação:" << endl;
 		cout << "--------------------------------------------------------------------------------" << endl;
 		cout << "--------------------------------------------------------------------------------" << endl;
 		testar_ordenacao();
-		//testar_ordenacao_dupla();
-	//}
+	}
 	cout << "--------------------------------------------------------------------------------" << endl;
 	cout << "----------------------------------------FIM-------------------------------------" << endl << endl;
 	

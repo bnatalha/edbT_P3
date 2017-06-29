@@ -21,7 +21,6 @@ template< typename T>
 void print_lista(myLista<T>& test);
 
 void sort_test(myLista<int>& test, const int N, void (*alg_sort) (myLista<int>&));	/**< Preenche um myLista de inteiros com valores aleatorios e depois os ordena utilizando uma função sort */
-void sort_test2(myLista<int>& test, const int N, void (*alg_sort) (myLista<int>&, typename myLista<int>::iterator, typename myLista<int>::iterator ) ); /**< Preenche um myLista de inteiros com valores aleatorios e depois os ordena utilizando uma função sort com iterators de parametro */
 
 /**
 * @brief Testa os algoritmos de ordenação com listas de interios gerados aleatoriamente e alocados dinamicamente
@@ -41,7 +40,7 @@ void testar_ordenacao( )
 	{
 		cout << "=======================================================================================" << endl;
 		cout << " Testes com vetor de tamanho: ( " << sizes[i] << " )" << endl;
-	/*	cout << "---------------- myBubbleSort----------------" << endl;
+		cout << "---------------- myBubbleSort----------------" << endl;
 		sort_test(lista, sizes[i], myBubbleSort);
 		cout << "---------------------------------------------" << endl;
 		cout << "---------------- myInsertSort----------------" << endl;
@@ -50,13 +49,7 @@ void testar_ordenacao( )
 		cout << "---------------- mySelectionSort----------------" << endl;
 		sort_test(lista, sizes[i], mySelectionSort);
 		cout << "---------------------------------------------" << endl;
-	*/	cout << "---------------- myQuickSort----------------" << endl;
-		sort_test2(lista, sizes[i], myQuickSort);
-		cout << "---------------------------------------------" << endl;
-	/*	cout << "---------------- mySplitSort----------------" << endl;
-		sort_test(lista, sizes[i], mySplitSort);
-		cout << "---------------------------------------------" << endl;
-	*/	cout << "=======================================================================================" << endl;
+		cout << "=======================================================================================" << endl;
 	}
 }
 
@@ -106,29 +99,6 @@ void sort_test(myLista<int>& test, const int N, void (*alg_sort) (myLista<int>&)
 
 	cout << endl << "Ordenando myLista...";
 	alg_sort(test);	// Ordena o myLista usando o algoritmo escolhido.
-
-	cout << "Pronto." << endl;
-	print_lista(test);	// Mostra o conteudo do myLista após ter sido oredenado.
-	cout << endl;
-}
-
-/**
-* @param test myLista de inteiros
-* @param alg_sort ponteiro para a função de ordenação a ser utilizada
-*/
-void sort_test2(myLista<int>& test, const int N, void (*alg_sort) (myLista<int>&, typename myLista<int>::iterator, typename myLista<int>::iterator ) )
-{
-	cout << "Preenchendo meu myLista de inteiros com valores aleatorios...";
-	fill_lista(test,N);	// Preenche myLista com valores aleatorios entre 0 e 30.
-
-	cout << "Pronto." << endl;
-	print_lista(test);	// Mostra o conteudo do myLista gerado aleatoriamente no terminal.
-
-	typename myLista<int>::iterator ini = test.begin();
-	typename myLista<int>::iterator fim = test.before_end();
-
-	cout << endl << "Ordenando myLista...";
-	alg_sort(test,ini,fim);	// Ordena o myLista usando o algoritmo escolhido.
 
 	cout << "Pronto." << endl;
 	print_lista(test);	// Mostra o conteudo do myLista após ter sido oredenado.

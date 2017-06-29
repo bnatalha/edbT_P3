@@ -200,57 +200,5 @@ void mySelectionSort(myLista<int>& lista){
 	}
 }
 
-/**
-* @brief Cria as partições que serão utilizadas por myQuickSort
-* @param lista myLista<int> que será ordenada
-*/
-typename myLista<int>::iterator myQuickSortPartition(myLista<int>& lista, typename myLista<int>::iterator ini, typename myLista<int>::iterator fim ){
-	typename myLista<int>::iterator myPivot = ini;
-	typename myLista<int>::iterator myPivot_plus = myPivot;
-	myPivot_plus++;
-	typename myLista<int>::iterator menor = myPivot_plus;
-	typename myLista<int>::iterator Maior = fim;
-	typename myLista<int>::iterator Maior_minus = Maior;
-	Maior_minus--;
-
-	while ( Maior_minus != menor  )
-	{
-		if( *(menor)  >=  *(Maior) and menor != Maior ) mySwap( *(menor), *(Maior));
-		if( *(myPivot) >=  *(menor) )
-		{
-			mySwap( *(menor), *(myPivot));
-			menor++;
-			myPivot++;
-		}
-		if( *(myPivot) <  *(Maior) ) Maior--; Maior_minus--;
-	}
-
-	return myPivot;
-}
-
-/**
-* @brief Simula o quick sort, ordenando um myLista de int o deixando crescente.
-* @param lista myLista<int> que será ordenada
-*/
-void myQuickSort(myLista<int>& lista, typename myLista<int>::iterator ini, typename myLista<int>::iterator fim ){
-
-	//if(lista.size() >=2 )
-	//{
-		//typename myLista<int>::iterator ini_plus = ini;
-		//ini_
-		//if( ini != fim and ini >= 0){
-		if( ini != fim and ini != lista.end()){
-			typename myLista<int>::iterator p = myQuickSortPartition(lista,ini,fim);
-
-			typename myLista<int>::iterator p_minus = p;
-			typename myLista<int>::iterator p_plus = p;
-			p_minus--;
-			p_plus++;
-
-			myQuickSort(lista, ini, p_minus);
-			myQuickSort(lista, p_plus, fim);
-		}
-	//}
-}
 
 #endif
