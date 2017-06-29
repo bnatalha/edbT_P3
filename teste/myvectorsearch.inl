@@ -1,0 +1,6 @@
+#ifndef _MYVECTORSEARCH_INL_
+#define _MYVECTORSEARCH_INL_
+
+
+
+#endif
