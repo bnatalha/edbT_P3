@@ -7,13 +7,8 @@
 */
 
 #include "header.h"
-#include "natalia.h"
 #include "testar_ordenacao.h"
 #include "testar_lista.h"
-#include "testar_fila.h"
-#include "testar_pilha.h"
-#include "testar_deque.h"
-
 
 /**
 * @brief Solicita ao usuário se ele deseja proceder com um determinado teste do namespace edb1;
@@ -37,47 +32,24 @@ bool proceder(const char* testname)
 * @brief Realiza testes com os objetos/algoritmos do namespace edb1
 */
 int main(int argc, char const *argv[])
-{
-	
-	cout << "Iniciando testes da biblioteca..." << endl;
-	
+{	
 	cout << "Testando TADS:" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
-	if( proceder("myLista") )
+	/*if( proceder("myLista") )
 	{
-		cout << "================ myLista =================" << endl;
+		cout << "================ Mylista_ligada =================" << endl;
 		testar_lista();
 		cout << "=======================================fim" << endl;
 	}
-	if( proceder("myPilha") )
-	{
-		cout << "================ myPilha =================" << endl;
-		testar_pilha();
-		cout << "=======================================fim" << endl;
-	}
-	if( proceder("myFila") )
-	{
-		cout << "================ myFila ==================" << endl;
-		testar_fila();
-		cout << "=======================================fim" << endl;
-	}
-	if( proceder("myDeque") )
-	{
-		cout << "================ myDeque =================" << endl;
-		testar_deque();
-		cout << "=======================================fim" << endl;
-	}
-	cout << "--------------------------------------------------------------------------------" << endl;
-	cout << "----------------------------------------FIM-------------------------------------" << endl << endl;
-
+	
 	if( proceder("algoritmos de ordenação") )
 	{
-		cout << "Testando algoritmos de ordenação:" << endl;
+	*/	cout << "Testando algoritmos de ordenação:" << endl;
 		cout << "--------------------------------------------------------------------------------" << endl;
 		cout << "--------------------------------------------------------------------------------" << endl;
 		testar_ordenacao();
-	}
+	//}
 	cout << "--------------------------------------------------------------------------------" << endl;
 	cout << "----------------------------------------FIM-------------------------------------" << endl << endl;
 	

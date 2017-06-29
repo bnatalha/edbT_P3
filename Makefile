@@ -26,7 +26,7 @@ CC =g++
 .PHONY: all init val clean docs
 #.PHONY: linux init val clean docs
 
-all: init bin/main clean
+all: init build/main clean
 
 # Creates the 'build' and the 'lib' folder at the current directory if there's no other folder with this name on it.
 init:
@@ -41,25 +41,29 @@ docs: Doxyfile
 	doxygen	
 
 # ============== VALGRIND =================
-# Runs valgrind with 'build/func_ordem'
+# Runs valgrind with 'build/main'
 val:
-	valgrind --leak-check=yes build/func_ordem
+	valgrind --leak-check=yes build/main
 
 # ============== EXECUTABLES ==============
 # For main:
-bin/main: bin/main.o func_ordem.o
+#build/main: build/main.o build/func_ordem.o
+#	g++ $^ -o $@
+
+# For main:
+build/main: build/main.o
 	g++ $^ -o $@
 
 # ================ OBJECTS ================
 # For main:
-bin/main.o: src/main.cpp
-	g++ $(CPPFLAGS) $< $(INC1) $(INC2) $(INC3) -c -o $@
+build/main.o: src/main.cpp
+	g++ $(CPPFLAGS) $< -c -o $@
 
 # For func_ordem:
-bin/func_ordem.o: src/func_ordem.cpp
-	g++ $(CPPFLAGS) $< $(INC1) $(INC2) $(INC3) -c -o $@
+#build/func_ordem.o: src/func_ordem.cpp
+#	g++ $(CPPFLAGS) $< -c -o $@
 
 # ================ CLEANER ================
 # Removes objects
 clean:
-	$(RM) bin/*.o
+	$(RM) build/*.o

@@ -11,29 +11,28 @@
 
 #include <ctime>
 #include "header.h"
+#include "Mylista_ligada_alg.h"
 
-void fillVector(int *v, int N);	/**< Preenche um arranjo de inteiros com valores aleatórios entre 0 e 30. */
-void printVector(int *v, int N);	/**< Imprime o conteúdo de um arranjo de inteiros no terminal (cout) */
-void sort_test(int *v, int N, void (*alg_sort) (int*,int,int) );	/**< Preenche um arranjo de inteiros com valores aleatorios e depois os ordena utilizando uma função sort */
+
+void fill_lista(Mylista_ligada<int>& test, int N);	/**< Preenche um Mylista_ligada de inteiros com valores aleatórios entre 0 e 30. */
+
+template< typename T>
+void print_lista(Mylista_ligada<T>& test);
+
+void sort_test(Mylista_ligada<int>& test, const int N, void (*alg_sort) (Mylista_ligada<int>&));	/**< Preenche um Mylista_ligada de inteiros com valores aleatorios e depois os ordena utilizando uma função sort */
 
 /**
-* @brief Testa os algoritmos de ordenação com arranjos de interios gerados aleatoriamente e alocados dinamicamente
+* @brief Testa os algoritmos de ordenação com listas de interios gerados aleatoriamente e alocados dinamicamente
 */
 void testar_ordenacao( )	
 {
 
-	// Teste com arranjos de tamanho 0, 1, 2, 3, 16 e 17.
+	// Teste com listas de tamanho 0, 1, 2, 3, 16 e 17.
 	
-	int sizes[6] = {0, 1, 2, 3, 16, 17};	/*< Arranjo de inteiros que armazenará o tamanho dos arranjos apontados por 'arrays' */
+	int sizes[6] = {0, 1, 2, 3, 16, 17};	/*< Arranjo de inteiros que armazenará o tamanho dos listas apontados por 'arrays' */
 	//				0  1  2  3   4   5
 	
-	cout << "Alocando arranjos dinamicamente (tamanhos: 0, 1, 2, 3, 16 e 17)...";
-	
-	int** arrays = new int*[6];	/**< Ponteiro para arranjo de inteiros dinamicamente alocado de tamanho '6' */
-
-	for (int i = 0; i < 6; i++) arrays[i] = new int[sizes[i]];	// Alocando arranjos dinamicamente
-
-	cout << "Pronto." << endl;
+	Mylista_ligada<int> lista;	/**< Ponteiro para Mylista_ligada de inteiros dinamicamente alocado de tamanho '6' */
 
 	for(auto i = 0; i < 6; i++)
 	//for(auto i = 0; i <= 4; i++)
@@ -41,68 +40,73 @@ void testar_ordenacao( )
 		cout << "=======================================================================================" << endl;
 		cout << " Testes com vetor de tamanho: ( " << sizes[i] << " )" << endl;
 		cout << "---------------- myBubbleSort----------------" << endl;
-		sort_test(arrays[i], sizes[i], edb1::myBubbleSort);
+		sort_test(lista, sizes[i], myBubbleSort);
 		cout << "---------------------------------------------" << endl;
-		cout << "---------------- myInsertSort----------------" << endl;
-		sort_test(arrays[i], sizes[i], edb1::myInsertSort);
+	/*	cout << "---------------- myInsertSort----------------" << endl;
+		sort_test(lista, sizes[i], myInsertSort);
 		cout << "---------------------------------------------" << endl;
 		cout << "---------------- mySelectionSort----------------" << endl;
-		sort_test(arrays[i], sizes[i], edb1::mySelectionSort);
+		sort_test(lista, sizes[i], mySelectionSort);
 		cout << "---------------------------------------------" << endl;
 		cout << "---------------- myQuickSort----------------" << endl;
-		sort_test(arrays[i], sizes[i], edb1::myQuickSort);
+		sort_test(lista, sizes[i], myQuickSort);
 		cout << "---------------------------------------------" << endl;
 		cout << "---------------- mySplitSort----------------" << endl;
-		sort_test(arrays[i], sizes[i], edb1::mySplitSort);
+		sort_test(lista, sizes[i], mySplitSort);
 		cout << "---------------------------------------------" << endl;
-		cout << "=======================================================================================" << endl;
+	*/	cout << "=======================================================================================" << endl;
 	}
-
-	cout << "Deletando arranjos alocados dinamicamente. " << endl;
-	for (int i = 0; i < 6; i++) delete[] arrays[i];
-	delete[] arrays;
 }
 
 /**
-* @param v arranjo de inteiros a ser preenchido
-* @param N tamanho do arranjo a ser preenchido
+* @param v Mylista_ligada de inteiros a ser preenchida
+* @param N tamanho do Mylista_ligada a ser preenchida
 */
-void fillVector(int *v, int N)
+void fill_lista(Mylista_ligada<int>& test, int N)
 {	
+	test.clear();	// limpa a lista antes de preenche-la
+	int x;
+
 	srand (time(NULL));		// Usa o tempo de máquina atual como semente para gerar rand()
 
-	for (int i = 0; i < N; ++i) v[i] = rand() % 31;	// Atribui a cada posição 'i' um valor aleatório que pertença a [0,30]
+	for (int i = 0; i < N; ++i)
+	{
+		x = rand() % 31;
+		test.push_front(x);	// Atribui a cada posição 'i' um valor aleatório que pertença a [0,30]
+	}
 }
 
 /**
-* @param v arranjo de inteiros a ser impresso
-* @param N tamanho do arranjo a ser impresso
+* @brief Imprime o conteúdo de um objeto Mylista_ligada no terminal
+* @param test Mylista_ligada a ser impresso
+* @param list_name nome da variável que guarda 'test'
 */
-void printVector(int *v, int N)
+template< typename T>
+void print_lista(Mylista_ligada<T>& test)
 {
-	cout << "Arranjo: [ ";
-	for (int i = 0; i < N; ++i) cout << v[i] << " ";
-	cout << "]";
+	cout << "Conteúdo: [ ";
+	for (auto &e : test)
+		cout << e << " ";
+	cout << "]" << endl;
 }
 
 /**
-* @param v arranjo de inteiros
-* @param N tamanho do arranjo
+* @param v Mylista_ligada de inteiros
 * @param alg_sort ponteiro para a função de ordenação a ser utilizada
 */
-void sort_test(int *v, int N, void (*alg_sort) (int*,int,int) )
+void sort_test(Mylista_ligada<int>& test, const int N, void (*alg_sort) (Mylista_ligada<int>&) )
 {
-	cout << "Preenchendo meu arranjo de inteiros com valores aleatorios...";
-	fillVector(v,N);	// Preenche arranjo com valores aleatorios entre 0 e 30.
+	cout << "Preenchendo meu Mylista_ligada de inteiros com valores aleatorios...";
+	fill_lista(test,N);	// Preenche Mylista_ligada com valores aleatorios entre 0 e 30.
 
 	cout << "Pronto." << endl;
-	printVector(v,N);	// Mostra o conteudo do arranjo gerado aleatoriamente no terminal.
+	print_lista(test);	// Mostra o conteudo do Mylista_ligada gerado aleatoriamente no terminal.
 
-	cout << endl << "Ordenando arranjo...";
-	alg_sort( v, 0, N-1);	// Ordena o arranjo usando o algoritmo escolhido.
+	cout << endl << "Ordenando Mylista_ligada...";
+	alg_sort(test);	// Ordena o Mylista_ligada usando o algoritmo escolhido.
 
 	cout << "Pronto." << endl;
-	printVector(v,N);	// Mostra o conteudo do arranjo após ter sido oredenado.
+	print_lista(test);	// Mostra o conteudo do Mylista_ligada após ter sido oredenado.
 	cout << endl;
 }
 
